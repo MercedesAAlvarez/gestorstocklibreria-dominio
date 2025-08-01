@@ -3,6 +3,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import productRoute from './routes/productRoute';
 
 dotenv.config(); 
 
@@ -15,6 +16,9 @@ app.use(express.json());
 app.get('/', (_, res) => {
   res.send('Hello!Backend running!');
 });
+
+
+app.use('/api/products', productRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
