@@ -1,8 +1,8 @@
 
 
 import type { Request, Response } from 'express';
-import { createProductAdapter } from '../adapters/product/createProductAdapter';
-import { getAllProductsAdapter } from '../adapters/product/getAllProductsAdapter';
+import { createProductAdapter } from '../adapters/createProductAdapter';
+import { getAllProductsAdapter } from '../adapters/getAllProductsAdapter';
 
 export const ProductController = {
   create: (req: Request, res: Response) => {
