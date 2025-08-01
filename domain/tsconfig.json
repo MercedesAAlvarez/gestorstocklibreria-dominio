@@ -1,9 +1,16 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "outDir": "../dist",
+    "baseUrl": "./",
+    "paths": {
+      "@entities/*": ["src/entities/*"],
+      "@repositories/*": ["src/repositories/*"],
+      "@apapters/*": ["src/adapters/*"],
+      "@use-cases/*": ["src/use-cases/*"]
+    },
+   
   },
-  "include": ["src"]
+  "include": ["src","tests","test"]
 }

@@ -1,4 +1,4 @@
-// domain/src/entities/Product.ts
+
 
 export class Product {
   public readonly id: number;
