@@ -1,30 +1,39 @@
 
 import { User } from '../entities/User';
+import { UserRepository } from "../repositories/interfaces/UserRepository";
+import { PasswordService } from "../services/password-service";
 
-export interface UserRepository {
-  findByEmail(email: string): User | undefined;
+interface LoginUserInput {
+  email: string;
+  password:string;
 }
 
-export interface PasswordService {
-  compare(plain: string, hashed: string): boolean;
-}
+
+
+//export interface UserRepository {
+ // findByEmail(email: string): User | undefined;
+//}
+
+//export interface PasswordService {
+  //compare(plain: string, hashed: string): boolean;
+//}
 
 export class LoginUser {
   constructor(
-    private readonly userRepository: UserRepository,
+    private readonly repository: UserRepository,
     private readonly passwordService: PasswordService
   ) {}
 
-  execute(email: string, password: string): User {
-    const user = this.userRepository.findByEmail(email);
+   async execute({email, password}: LoginUserInput) {
+    const user = await this.repository.findByEmail(email);
 
     if (!user) {
       throw new Error('Invalid credentials');
     }
 
-    const passwordMatches = this.passwordService.compare(password, user.password);
+    const isValid = await this.passwordService.compare(password, user.password);
 
-    if (!passwordMatches) {
+    if (!isValid) {
       throw new Error('Invalid credentials');
     }
 
